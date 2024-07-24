@@ -15,47 +15,63 @@ public class Main {
 	//check if a new record on furthest distance traveled is made -> if it is change int maxDistance to it and reset counter of moves back if not increase counter of 
 	//moves back by one and move that many spaces back
 	
-	public static JPanel createJPanels() {
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.black);
-
-		return panel;
-	}
-	
-	
-	public static void main (String[]args) {
-		ArrayList<int[]> prevMoves = new ArrayList<int[]>();
+	public static void main(String[] args) {
+		int dimensions = 9;
+		JPanel[][] panelArray = new JPanel[dimensions][dimensions];
+		JFrame main = new JFrame();
 		
-		int puzzleDimensions = 13;
+		main.setLayout(new GridLayout(dimensions, dimensions));
 		
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500,500);
-		frame.setLayout(new GridLayout(puzzleDimensions,puzzleDimensions,0,0));
-
-
-		JPanel[][] boxes = new JPanel[puzzleDimensions][puzzleDimensions];
-		for(int i = 0; i < puzzleDimensions; i++) {
-			for(int a = 0; a < puzzleDimensions;a++) {
-				boxes[i][a] = createJPanels();
-				frame.add(boxes[i][a]);
+		for(int i = 0; i < dimensions; i++) {
+			for(int a = 0; a < dimensions; a++) {
+				panelArray[i][a] = new JPanel();
+				panelArray[i][a].setBackground(Color.black);
+				main.add(panelArray[i][a]);
 			}
 		}
 		
 		
-		boxes[0][puzzleDimensions/2].setBackground(Color.white);
-		boxes[boxes.length/2][boxes.length/2].setBackground(Color.green);
-
-		int currentBox = puzzleDimensions/2;
-		//prevMoves.add(0, puzzleDimensions/2);
-
+		ArrayList<Integer> pastMoves = new ArrayList<Integer>();
+		int mostMovesIn = 0;
+		int farthestBackFromCurrentMostMovesIn = 0;
+		
+		panelArray[dimensions/2][dimensions/2].setBackground(Color.green);
+		panelArray[0][dimensions/2].setBackground(Color.white);
+		pastMoves.add(0);
+		pastMoves.add(dimensions/2);
+		
+		int currentX = dimensions/2;
+		int currentY = 0;
+		
+		while(currentX != dimensions/2 && currentY != dimensions/2) {
+			ArrayList<Integer> openSpaces = new ArrayList<Integer>();
+			if(currentY != 0) {
+				openSpaces.add(1);
+			}
+			if(currentY != dimensions) {
+				openSpaces.add(3);
+			}
+			if(currentX != 0) {
+				openSpaces.add(4);
+			}
+			if(currentX != dimensions) {
+				openSpaces.add(2);
+			}
+			
+			int x = openSpaces.get((int)(Math.random() * openSpaces.size()));
+			
+			if(x == 1) {
+				currentY -= 2;
+				
+			}
+		}
 		
 		
 		
 		
 		
-		
-		frame.setVisible(true);
-
+		main.setSize(900, 900);
+		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		main.setVisible(true);
 	}
 }
