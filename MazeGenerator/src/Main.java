@@ -16,12 +16,13 @@ public class Main {
 	//moves back by one and move that many spaces back
 	
 	public static void main(String[] args) {
+		//initializing variables
 		int dimensions = 9;
 		JPanel[][] panelArray = new JPanel[dimensions][dimensions];
 		JFrame main = new JFrame();
-		
+		//gridlayout input
 		main.setLayout(new GridLayout(dimensions, dimensions));
-		
+		//assigning JPanels into panelArray and adding into the frame as well as changing color to black
 		for(int i = 0; i < dimensions; i++) {
 			for(int a = 0; a < dimensions; a++) {
 				panelArray[i][a] = new JPanel();
@@ -30,44 +31,31 @@ public class Main {
 			}
 		}
 		
-		
+		//pastMoves is for tracking the past moves that were done, mostMovesIn keeps track of the farthest computed puzzle, farthestBackFromCurrentMovesIn keeps track of 
+		//how far back the computer has previously iterated from the mostMovesIn variable in order to be able to go one further back
 		ArrayList<Integer> pastMoves = new ArrayList<Integer>();
 		int mostMovesIn = 0;
 		int farthestBackFromCurrentMostMovesIn = 0;
-		
+		//sets the center and start to correct colors as well as adding the start as the first move in the correct format of [x][y] which is how inputed into array
 		panelArray[dimensions/2][dimensions/2].setBackground(Color.green);
 		panelArray[0][dimensions/2].setBackground(Color.white);
 		pastMoves.add(0);
 		pastMoves.add(dimensions/2);
 		
-		int currentX = dimensions/2;
-		int currentY = 0;
-		
-		while(currentX != dimensions/2 && currentY != dimensions/2) {
+		//the while loop iterates as long as the current location is not the center location (the end)
+		while(pastMoves.get(pastMoves.size() - 1) != dimensions/2 && pastMoves.get(pastMoves.size()) != dimensions/2) {
+			//creates an array for adding which spaces are open two to the top, bottom, left, and right
 			ArrayList<Integer> openSpaces = new ArrayList<Integer>();
-			if(currentY != 0) {
-				openSpaces.add(1);
-			}
-			if(currentY != dimensions) {
-				openSpaces.add(3);
-			}
-			if(currentX != 0) {
-				openSpaces.add(4);
-			}
-			if(currentX != dimensions) {
-				openSpaces.add(2);
-			}
 			
+			
+			
+			
+			//randomly generates which space to go to
 			int x = openSpaces.get((int)(Math.random() * openSpaces.size()));
 			
-			if(x == 1) {
-				currentY -= 2;
-				
-			}
+			
+			
 		}
-		
-		
-		
 		
 		
 		main.setSize(900, 900);
