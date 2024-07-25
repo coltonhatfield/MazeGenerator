@@ -43,11 +43,19 @@ public class Main {
 		pastMoves.add(dimensions/2);
 		
 		//the while loop iterates as long as the current location is not the center location (the end)
+		//Some important function are: pastMoves.get(pastMoves.size() - 1) <-- This will give the most recent positions how far down value
+		//pastMoves.get(pastMoves.size())
 		while(pastMoves.get(pastMoves.size() - 1) != dimensions/2 && pastMoves.get(pastMoves.size()) != dimensions/2) {
 			//creates an array for adding which spaces are open two to the top, bottom, left, and right
 			ArrayList<Integer> openSpaces = new ArrayList<Integer>();
-			
-			
+			//check the top space
+			if(pastMoves.get(pastMoves.size() - 1) != 0 && panelArray[pastMoves.get(pastMoves.size() - 1) - 2][pastMoves.get(pastMoves.size())].getBackground() == Color.black) {
+				openSpaces.add(1);
+			}
+			//check the bottom space - not finished
+			if(pastMoves.get(pastMoves.size() - 1) != dimensions && panelArray[pastMoves.get(pastMoves.size() - 1) - 2][pastMoves.get(pastMoves.size())].getBackground() == Color.black) {
+				openSpaces.add(1);
+			}
 			
 			
 			//randomly generates which space to go to
